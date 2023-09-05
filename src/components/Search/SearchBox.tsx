@@ -34,6 +34,7 @@ const StyledSearchBox = styled.div`
 
   p {
     font-weight: bold;
+    font-size: 0.8rem;
     color: #999;
     padding-left: 1rem;
     margin-bottom: 0.5rem;
