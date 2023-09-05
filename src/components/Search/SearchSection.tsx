@@ -27,7 +27,7 @@ export default function SearchSection() {
     <>
       <SearchBar inputText={inputText} setInputText={setInputText} data={data} />
       {inputText.length > 0 && (  // 비어있지 않을 때만 렌더링
-        <SearchBox inputText={inputText} data={data} />
+        <SearchBox data={data} />
       )}
     </>
   );
