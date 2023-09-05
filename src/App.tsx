@@ -5,10 +5,12 @@ import Header from './components/common/Header/Header';
 
 function App() {
   return (
-    <Layout>
+    <>
       <Header />
-      <Outlet />
-    </Layout>
+      <Layout>
+        <Outlet />
+      </Layout>
+    </>
   );
 }
 
