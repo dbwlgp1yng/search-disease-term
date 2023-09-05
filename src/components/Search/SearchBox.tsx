@@ -29,8 +29,8 @@ const StyledSearchBox = styled.div`
   background-color: #fff;
   width: 500px;
   height: 300px;
-  padding: 1rem 0;
-  overflow-y: scroll;
+  padding: 2rem 0;
+  border-radius: 2rem;
 
   p {
     font-weight: bold;
@@ -39,15 +39,12 @@ const StyledSearchBox = styled.div`
     padding-left: 1rem;
     margin-bottom: 0.5rem;
   }
-  ul {
-    height: 300px;
-  }
   li {
     padding: 0.5rem 0 0.5rem 1rem;
     cursor: pointer;
     
     &:hover {
-      background-color: #637d92;
+      background-color: #3284c7;
       color: #fff;
       font-weight: bold;
     }

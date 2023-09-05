@@ -28,6 +28,7 @@ const StyledForm = styled.form`
   width: 500px;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 1rem;
 
   input {
     width: 400px;
