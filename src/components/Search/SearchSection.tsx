@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { SearchWordType } from '../../types';
 import SearchBox from './SearchBox';
 import SearchBar from './SearchBar';
+import { styled } from 'styled-components';
 
 export default function SearchSection() {
   const [data, setData] = useState<SearchWordType[] | null>(null);
@@ -24,11 +25,18 @@ export default function SearchSection() {
   }, [inputText]);
 
   return (
-    <>
+    <StyledSearch>
       <SearchBar inputText={inputText} setInputText={setInputText} data={data} />
       {inputText.length > 0 && (  // 비어있지 않을 때만 렌더링
         <SearchBox data={data} />
       )}
-    </>
+    </StyledSearch>
   );
 };
+
+const StyledSearch = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 2rem;
+`;

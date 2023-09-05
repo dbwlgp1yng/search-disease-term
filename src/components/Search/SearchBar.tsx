@@ -1,5 +1,6 @@
 import React from 'react';
 import { SearchWordType } from "../../types";
+import { styled } from 'styled-components';
 
 type SearchBarProps = {
   inputText: string;
@@ -11,7 +12,7 @@ export default function SearchBar({ inputText, setInputText, data }: SearchBarPr
     setInputText(event.currentTarget.value);
   }
   return (
-    <form>
+    <StyledForm>
       <input
         type="text"
         placeholder='질환명을 입력해 주세요.'
@@ -19,6 +20,21 @@ export default function SearchBar({ inputText, setInputText, data }: SearchBarPr
         onChange={handleChangeInput} 
       />
       <button type="button">검색</button>
-    </form>
+    </StyledForm>
   );
 };
+
+const StyledForm = styled.form`
+  width: 500px;
+  display: flex;
+  justify-content: space-between;
+
+  input {
+    width: 400px;
+    padding: 1.5rem 0;
+    padding-left: 1rem;
+  }
+  button {
+    padding: 1.5rem 1.5rem;
+  }
+`;
