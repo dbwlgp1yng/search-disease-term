@@ -1,16 +1,20 @@
 import React from 'react';
-import { SearchWordType } from "../../../types";
 import { styled } from 'styled-components';
 
 type SearchBarProps = {
   inputText: string;
   setInputText: (text: string) => void;
-  data: SearchWordType[] | null;
 };
-export default function SearchBar({ inputText, setInputText, data }: SearchBarProps) {
+
+export default function SearchBar({ 
+    inputText, 
+    setInputText, 
+  }: SearchBarProps) {
+
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(event.currentTarget.value);
   }
+
   return (
     <StyledForm>
       <input

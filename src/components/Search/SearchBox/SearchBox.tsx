@@ -12,7 +12,9 @@ export default function SearchBox({ data }: SearchBoxProps) {
           <p>추천 검색어</p>
           <ul>
             {data.map((item, index) => (
-              <li key={index}>{item.sickNm}</li>
+              <li key={index}>
+                {item.sickNm}
+              </li>
             ))}
           </ul>
         </StyledSearchBox>
