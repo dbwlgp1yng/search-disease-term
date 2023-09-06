@@ -10,18 +10,29 @@ export default function SearchSection() {
   const [inputText, setInputText] = useState('');
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await apiClient.get(`/sick?q=${inputText}`);
-        setData(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+    const cachedDataFromStorage = sessionStorage.getItem(`cachedData-${inputText}`);
 
-    if (inputText.length > 0) {
-      fetchData(); // inputText가 비어있지 않을 때만 fetchData 호출
-    } 
+    if (cachedDataFromStorage) {
+      const parsedData = JSON.parse(cachedDataFromStorage);
+      setData(parsedData); // 세션 스토리지에서 불러온 데이터를 UI에 표시
+    } else { // 세션 스토리지에 데이터가 없을 때, API를 호출하고 세션 스토리지에 저장
+      const fetchData = async () => {
+        try {
+          console.info("calling api");
+          const response = await apiClient.get(`/sick?q=${inputText}`);
+          const responseData = response.data;
+          setData(responseData);
+  
+          sessionStorage.setItem(`cachedData-${inputText}`, JSON.stringify(responseData));
+        } catch (error) {
+          console.error(error);
+        }
+      };
+  
+      if (inputText.length > 0) {
+        fetchData();
+      }
+    }
   }, [inputText]);
 
   return (
