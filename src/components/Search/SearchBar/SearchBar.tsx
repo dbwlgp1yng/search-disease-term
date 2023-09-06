@@ -57,9 +57,6 @@ export default function SearchBar({
 
 
 
-
-
-
 const StyledForm = styled.form`
   width: 500px;
   display: flex;

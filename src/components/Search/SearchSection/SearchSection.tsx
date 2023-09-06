@@ -29,7 +29,7 @@ export default function SearchSection() {
           const responseData = response.data;
           setData(responseData);
 
-          setSessionStorageWithExpiry(text, JSON.stringify(responseData), 1);
+          setSessionStorageWithExpiry(text, JSON.stringify(responseData), 60);
         } catch (error) {
           console.error(error);
         }

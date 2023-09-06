@@ -43,6 +43,9 @@ export default function SearchBox({ data, selectedSuggestionIndex}: SearchBoxPro
   );
 }
 
+
+
+
 const StyledSearchBox = styled.div`
   background-color: #fff;
   width: 500px;
