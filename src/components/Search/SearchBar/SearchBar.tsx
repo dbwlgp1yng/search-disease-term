@@ -1,5 +1,5 @@
 import React from 'react';
-import { SearchWordType } from "../../types";
+import { SearchWordType } from "../../../types";
 import { styled } from 'styled-components';
 
 type SearchBarProps = {

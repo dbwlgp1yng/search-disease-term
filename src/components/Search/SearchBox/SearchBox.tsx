@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { SearchWordType } from "../../types";
+import { SearchWordType } from "../../../types";
 
 type SearchBoxProps = {
   data: SearchWordType[] | null;

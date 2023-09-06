@@ -1,21 +1,22 @@
-import apiClient from '../../services/apiClient';
+import apiClient from '../../../services/apiClient';
 import React, { useEffect, useState } from 'react';
-import { SearchWordType } from '../../types';
-import SearchBox from './SearchBox';
-import SearchBar from './SearchBar';
+import { SearchWordType } from '../../../types';
+import SearchBox from '../SearchBox/SearchBox';
+import SearchBar from '../SearchBar/SearchBar';
 import { styled } from 'styled-components';
+import { setSessionStorageWithExpiry, getSessionStorageWithExpiry } from '../../../utils/cacheUtils';
 
 export default function SearchSection() {
   const [data, setData] = useState<SearchWordType[] | null>(null);
   const [inputText, setInputText] = useState('');
 
   useEffect(() => {
-    const cachedDataFromStorage = sessionStorage.getItem(`cachedData-${inputText}`);
+    const cachedDataFromStorage = getSessionStorageWithExpiry(inputText);
 
     if (cachedDataFromStorage) {
       const parsedData = JSON.parse(cachedDataFromStorage);
-      setData(parsedData); // 세션 스토리지에서 불러온 데이터를 UI에 표시
-    } else { // 세션 스토리지에 데이터가 없을 때, API를 호출하고 세션 스토리지에 저장
+      setData(parsedData); 
+    } else {
       const fetchData = async () => {
         try {
           console.info("calling api");
@@ -23,7 +24,7 @@ export default function SearchSection() {
           const responseData = response.data;
           setData(responseData);
   
-          sessionStorage.setItem(`cachedData-${inputText}`, JSON.stringify(responseData));
+          setSessionStorageWithExpiry(inputText, JSON.stringify(responseData), 1); 
         } catch (error) {
           console.error(error);
         }
