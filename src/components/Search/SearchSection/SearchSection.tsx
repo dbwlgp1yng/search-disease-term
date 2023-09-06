@@ -26,8 +26,8 @@ export default function SearchSection() {
           const responseData = response.data;
           setData(responseData);
 
-          // 만료시간 60분 설정
-          setSessionStorageWithExpiry(text, JSON.stringify(responseData), 60);
+          // 만료시간(분)설정
+          setSessionStorageWithExpiry(text, JSON.stringify(responseData), 1);
         } catch (error) {
           console.error(error);
         }
