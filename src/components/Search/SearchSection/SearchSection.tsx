@@ -1,17 +1,20 @@
 import apiClient from '../../../services/apiClient';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SearchWordType } from '../../../types';
 import SearchBox from '../SearchBox/SearchBox';
 import SearchBar from '../SearchBar/SearchBar';
 import { styled } from 'styled-components';
-import { setSessionStorageWithExpiry, getSessionStorageWithExpiry } from '../../../utils/cacheUtils';
+import { setSessionStorageWithExpiry, 
+  getSessionStorageWithExpiry } from '../../../utils/cacheUtils';
 import { useDebounce } from '../../../hooks/useDebounce';
 
 export default function SearchSection() {
   const [data, setData] = useState<SearchWordType[] | null>(null);
   const [inputText, setInputText] = useState('');
   const debouncedInputText = useDebounce(inputText, 300); // 300ms 뒤에 api 요청
-  
+
+  const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState<number>(-1);
+
   useEffect(() => {
     const fetchDataWithDebounce = async (text: string) => {
       const cachedDataFromStorage = getSessionStorageWithExpiry(text);
@@ -26,7 +29,6 @@ export default function SearchSection() {
           const responseData = response.data;
           setData(responseData);
 
-          // 만료시간 60분 설정
           setSessionStorageWithExpiry(text, JSON.stringify(responseData), 60);
         } catch (error) {
           console.error(error);
@@ -41,10 +43,19 @@ export default function SearchSection() {
 
   return (
     <StyledSearch>
-      <h2>국내 모든 임상시험 검색하고 <br/> 온라인으로 참여하기</h2>
-      <SearchBar inputText={inputText} setInputText={setInputText} data={data} />
+      <h2>국내 모든 임상시험 검색하고 <br /> 온라인으로 참여하기</h2>
+      <SearchBar 
+        inputText={inputText} 
+        setInputText={setInputText} 
+        setSelectedSuggestionIndex={setSelectedSuggestionIndex}
+        selectedSuggestionIndex={selectedSuggestionIndex}
+        suggestions={data ? data.map(item => item.sickNm) : []} 
+      />
       {inputText.length > 0 && (  // 비어있지 않을 때만 렌더링
-        <SearchBox data={data} />
+        <SearchBox 
+          data={data} 
+          selectedSuggestionIndex={selectedSuggestionIndex}
+        />
       )}
     </StyledSearch>
   );
