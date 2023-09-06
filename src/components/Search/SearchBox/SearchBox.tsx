@@ -6,7 +6,7 @@ type SearchBoxProps = {
   data: SearchWordType[] | null;
   selectedSuggestionIndex: number;
 };
-export default function SearchBox({ data, selectedSuggestionIndex }: SearchBoxProps) {
+export default function SearchBox({ data, selectedSuggestionIndex}: SearchBoxProps) {
   const scrollToSelected = () => {
     const selectedElement = document.querySelector(".selected");
 
@@ -49,7 +49,6 @@ const StyledSearchBox = styled.div`
   height: 300px;
   padding: 2rem 0;
   overflow-y: auto;
-
   p {
     font-weight: bold;
     font-size: 0.8rem;

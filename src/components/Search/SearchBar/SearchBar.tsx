@@ -12,23 +12,22 @@ type SearchBarProps = {
 export default function SearchBar({ 
     inputText, 
     setInputText, 
-    setSelectedSuggestionIndex, // 추가: 선택된 추천 검색어의 인덱스를 설정하는 함수
-    selectedSuggestionIndex, // 추가: 선택된 추천 검색어의 인덱스 상태
+    setSelectedSuggestionIndex, 
+    selectedSuggestionIndex, 
     suggestions,
   }: SearchBarProps) {
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'ArrowUp' && selectedSuggestionIndex > 0) {
-      setSelectedSuggestionIndex(selectedSuggestionIndex - 1);
-      event.preventDefault(); 
-      console.log('keyup');
-    } else if (
-      event.key === 'ArrowDown' &&
-      selectedSuggestionIndex < suggestions.length - 1
-    ) {
+    if (event.key === 'ArrowUp') {
+      if (selectedSuggestionIndex === 0) {
+        setSelectedSuggestionIndex(-1); 
+      } else if (selectedSuggestionIndex > 0) {
+        setSelectedSuggestionIndex(selectedSuggestionIndex - 1);
+      }
+      event.preventDefault();
+    } else if (event.key === 'ArrowDown' && selectedSuggestionIndex < suggestions.length - 1) {
       setSelectedSuggestionIndex(selectedSuggestionIndex + 1);
-      event.preventDefault(); 
-      console.log('keydown');
+      event.preventDefault();
     } else if (event.key === 'Enter' && selectedSuggestionIndex !== -1) {
       setInputText(suggestions[selectedSuggestionIndex]);
       setSelectedSuggestionIndex(-1);
