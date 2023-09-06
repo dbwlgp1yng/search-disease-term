@@ -5,37 +5,39 @@ import SearchBox from '../SearchBox/SearchBox';
 import SearchBar from '../SearchBar/SearchBar';
 import { styled } from 'styled-components';
 import { setSessionStorageWithExpiry, getSessionStorageWithExpiry } from '../../../utils/cacheUtils';
+import { useDebounce } from '../../../hooks/useDebounce';
 
 export default function SearchSection() {
   const [data, setData] = useState<SearchWordType[] | null>(null);
   const [inputText, setInputText] = useState('');
-
+  const debouncedInputText = useDebounce(inputText, 300); // 300ms 뒤에 api 요청
+  
   useEffect(() => {
-    const cachedDataFromStorage = getSessionStorageWithExpiry(inputText);
+    const fetchDataWithDebounce = async (text: string) => {
+      const cachedDataFromStorage = getSessionStorageWithExpiry(text);
 
-    if (cachedDataFromStorage) {
-      const parsedData = JSON.parse(cachedDataFromStorage);
-      setData(parsedData); 
-    } else {
-      const fetchData = async () => {
+      if (cachedDataFromStorage) {
+        const parsedData = JSON.parse(cachedDataFromStorage);
+        setData(parsedData);
+      } else {
         try {
           console.info("calling api");
-          const response = await apiClient.get(`/sick?q=${inputText}`);
+          const response = await apiClient.get(`/sick?q=${text}`);
           const responseData = response.data;
           setData(responseData);
-  
+
           // 만료시간 60분 설정
-          setSessionStorageWithExpiry(inputText, JSON.stringify(responseData), 60); 
+          setSessionStorageWithExpiry(text, JSON.stringify(responseData), 60);
         } catch (error) {
           console.error(error);
         }
-      };
-  
-      if (inputText.length > 0) {
-        fetchData();
       }
+    };
+
+    if (debouncedInputText.length > 0) {
+      fetchDataWithDebounce(debouncedInputText);
     }
-  }, [inputText]);
+  }, [debouncedInputText]);
 
   return (
     <StyledSearch>
