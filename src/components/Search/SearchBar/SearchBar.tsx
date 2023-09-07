@@ -33,13 +33,13 @@ export default function SearchBar({
       setSelectedSuggestionIndex(-1);
     }
   };  
-  
+
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(event.currentTarget.value);
   }
 
   return (
-    <StyledForm>
+    <StyledForm className={inputText ? '' : 'empty'}>
       <input
         type="text"
         placeholder='질환명을 입력해 주세요.'
@@ -61,15 +61,22 @@ export default function SearchBar({
 const StyledForm = styled.form`
   width: 500px;
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 1rem;
+  border-radius: 2rem 2rem 0 0;
+  overflow: hidden;
+  &.empty {
+    border-radius: 2rem;
+  }
 
   input {
-    width: 400px;
-    padding: 1.5rem 0;
-    padding-left: 1rem;
+    width: 80%;
+    padding: 1.5rem 0 1.5rem 2rem;
+    font-size: 1.125rem;
+    outline: none;
   }
+
   button {
-    padding: 1.5rem 1.5rem;
+    width: 20%;
+    font-size: 1.125rem;
+    cursor: pointer;
   }
 `;
