@@ -105,7 +105,7 @@ export function useDebounce(value: string, delay: number) {
 ### 3. 키보드로 검색어 이동 기능 구현
 - 키보드 방향키를 사용해 선택한 검색어를 이동할 수 있도록 함수를 커스텀 훅으로 분리했습니다.
 - 선택된 인덱스를 위 아래로 이동시키고, 상태 인덱스와 일치하는 li 태그를 강조표시하여 이동하는 것처럼 보이기 위해 스타일링 했습니다. 
-- ```selectedSuggestionIndex```가 변경될 때 ```scrollToSelected``` 함수가 호출되어 선택한 항목이 스크롤 가능한 영역의 가운데에 위치하도록 스크롤됩니다.
+- ```selectedIndex```가 변경될 때 ```scrollToSelected``` 함수가 호출되어 선택한 항목이 스크롤 가능한 영역의 가운데에 위치하도록 스크롤됩니다.
   ```ts
   const scrollToSelected = () => {
     const selectedElement = document.querySelector(".selected");
