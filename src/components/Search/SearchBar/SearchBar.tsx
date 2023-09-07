@@ -33,6 +33,7 @@ export default function SearchBar({
       setSelectedSuggestionIndex(-1);
     }
   };  
+  
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(event.currentTarget.value);
   }
