@@ -120,4 +120,4 @@ export function useDebounce(value: string, delay: number) {
 
 | 검색어 이동 | 
 | :---------------------------------------------------------------------: | 
-| <img width="600px" src="https://github.com/dbwlgp1yng/search-disease-term/assets/126330595/c0d00f36-195f-47d2-9476-05d0a6b173ba" alt="검색어이동" /> | 
+| <img width="600px" src="https://github.com/dbwlgp1yng/search-disease-term/assets/126330595/aaeabaf7-96b0-4e9a-a84c-555a237870d3" alt="검색어이동" /> | 
