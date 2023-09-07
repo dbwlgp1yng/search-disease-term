@@ -5,22 +5,22 @@ import useKeyDown from '../../../hooks/useKeyDown';
 type SearchBarProps = {
   inputText: string;
   setInputText: (text: string) => void;
-  selectedSuggestionIndex: number;
-  setSelectedSuggestionIndex: (index: number) => void;
+  selectedIndex: number;
+  setSelectedIndex: (index: number) => void;
   suggestions: string[];
 };
 
 export default function SearchBar({ 
     inputText, 
     setInputText, 
-    setSelectedSuggestionIndex, 
-    selectedSuggestionIndex, 
+    setSelectedIndex, 
+    selectedIndex, 
     suggestions,
   }: SearchBarProps) {
 
   const handleKeyDown = useKeyDown(
-    selectedSuggestionIndex, 
-    setSelectedSuggestionIndex, 
+    selectedIndex, 
+    setSelectedIndex, 
     suggestions, 
     setInputText
   );
