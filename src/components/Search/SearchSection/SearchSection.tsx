@@ -13,7 +13,7 @@ export default function SearchSection() {
   const [inputText, setInputText] = useState('');
   const debouncedInputText = useDebounce(inputText, 300); // 300ms 뒤에 api 요청
 
-  const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState<number>(-1);
+  const [selectedIndex, setSelectedIndex] = useState<number>(-1);
 
   useEffect(() => {
     const fetchDataWithDebounce = async (text: string) => {
@@ -47,14 +47,14 @@ export default function SearchSection() {
       <SearchBar 
         inputText={inputText} 
         setInputText={setInputText} 
-        setSelectedSuggestionIndex={setSelectedSuggestionIndex}
-        selectedSuggestionIndex={selectedSuggestionIndex}
+        setSelectedIndex={setSelectedIndex}
+        selectedIndex={selectedIndex}
         suggestions={data ? data.map(item => item.sickNm) : []} 
       />
       {inputText.length > 0 && (  // 비어있지 않을 때만 렌더링
         <SearchBox 
           data={data} 
-          selectedSuggestionIndex={selectedSuggestionIndex}
+          selectedIndex={selectedIndex}
         />
       )}
     </StyledSearch>

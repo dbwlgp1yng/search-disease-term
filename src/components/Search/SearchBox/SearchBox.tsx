@@ -4,9 +4,9 @@ import { useEffect } from "react";
 
 type SearchBoxProps = {
   data: SearchWordType[] | null;
-  selectedSuggestionIndex: number;
+  selectedIndex: number;
 };
-export default function SearchBox({ data, selectedSuggestionIndex}: SearchBoxProps) {
+export default function SearchBox({ data, selectedIndex}: SearchBoxProps) {
   const scrollToSelected = () => {
     const selectedElement = document.querySelector(".selected");
 
@@ -17,7 +17,7 @@ export default function SearchBox({ data, selectedSuggestionIndex}: SearchBoxPro
 
   useEffect(() => {
     scrollToSelected();
-  }, [selectedSuggestionIndex]);
+  }, [selectedIndex]);
   return (
     <>
       {data && data.length > 0 ? (
@@ -27,7 +27,7 @@ export default function SearchBox({ data, selectedSuggestionIndex}: SearchBoxPro
             {data.map((item, index) => (
               <li 
                 key={index}
-                className={selectedSuggestionIndex === index ? 'selected' : ''}
+                className={selectedIndex === index ? 'selected' : ''}
               >
                 {item.sickNm}
               </li>
