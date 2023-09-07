@@ -65,7 +65,7 @@ const StyledSearch = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 2rem;
+  padding-top: 4rem;
 
   h2 {
     font-weight: bold;
