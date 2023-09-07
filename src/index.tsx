@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { router } from './router/Router';
+import { router } from './router/router';
 import { RouterProvider } from 'react-router-dom';
 import GlobalStyle from './styles/GlobalStyle';
 
