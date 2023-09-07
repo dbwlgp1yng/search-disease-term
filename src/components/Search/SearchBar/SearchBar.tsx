@@ -1,5 +1,6 @@
 import React from 'react';
 import { styled } from 'styled-components';
+import useKeyDown from '../../../hooks/useKeyDown';
 
 type SearchBarProps = {
   inputText: string;
@@ -17,22 +18,12 @@ export default function SearchBar({
     suggestions,
   }: SearchBarProps) {
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'ArrowUp') {
-      if (selectedSuggestionIndex === 0) {
-        setSelectedSuggestionIndex(-1); 
-      } else if (selectedSuggestionIndex > 0) {
-        setSelectedSuggestionIndex(selectedSuggestionIndex - 1);
-      }
-      event.preventDefault();
-    } else if (event.key === 'ArrowDown' && selectedSuggestionIndex < suggestions.length - 1) {
-      setSelectedSuggestionIndex(selectedSuggestionIndex + 1);
-      event.preventDefault();
-    } else if (event.key === 'Enter' && selectedSuggestionIndex !== -1) {
-      setInputText(suggestions[selectedSuggestionIndex]);
-      setSelectedSuggestionIndex(-1);
-    }
-  };  
+  const handleKeyDown = useKeyDown(
+    selectedSuggestionIndex, 
+    setSelectedSuggestionIndex, 
+    suggestions, 
+    setInputText
+  );
 
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(event.currentTarget.value);
