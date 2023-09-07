@@ -95,7 +95,7 @@ export function useDebounce(value: string, delay: number) {
 
 |                                                         **Debouncing 전**                                                          |                                                               **Debouncing 후**                                                               |
 | :--------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------: |
-| <img width="475px" src="https://github.com/dbwlgp1yng/github-issues/assets/126330595/a638554b-58c2-4477-89ee-7f9ee39e75da" alt="디바운싱전" /> | <img width="475px" src="https://github.com/dbwlgp1yng/github-issues/assets/126330595/5b9fbb0d-c67a-4e53-96ad-eb84b54273c6" alt="디바운싱후" /> |
+| <img width="360px" src="https://github.com/dbwlgp1yng/github-issues/assets/126330595/a638554b-58c2-4477-89ee-7f9ee39e75da" alt="디바운싱전" /> | <img width="360px" src="https://github.com/dbwlgp1yng/github-issues/assets/126330595/5b9fbb0d-c67a-4e53-96ad-eb84b54273c6" alt="디바운싱후" /> |
 
 > **Debouncing** 선택 이유 <br />
 > 한글같은 조합형 언어에는 한 글자마다 제대로 된 결과가 나오지 않는 검색어가 많습니다. 
