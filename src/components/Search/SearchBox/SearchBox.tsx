@@ -1,23 +1,28 @@
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { SearchWordType } from "../../../types";
-import { useEffect } from "react";
 
 type SearchBoxProps = {
   data: SearchWordType[] | null;
   selectedIndex: number;
 };
-export default function SearchBox({ data, selectedIndex}: SearchBoxProps) {
-  const scrollToSelected = () => {
-    const selectedElement = document.querySelector(".selected");
 
-    if (selectedElement) {
-      selectedElement.scrollIntoView({ behavior: "smooth", block: "center" });
+export default function SearchBox({ data, selectedIndex }: SearchBoxProps) {
+  const selectedElementRef = useRef<HTMLLIElement | null>(null);
+
+  const scrollToSelected = () => {
+    if (selectedElementRef.current) {
+      selectedElementRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
     }
   };
 
   useEffect(() => {
     scrollToSelected();
   }, [selectedIndex]);
+
   return (
     <>
       {data && data.length > 0 ? (
@@ -25,9 +30,14 @@ export default function SearchBox({ data, selectedIndex}: SearchBoxProps) {
           <p>추천 검색어</p>
           <ul>
             {data.map((item, index) => (
-              <li 
+              <li
                 key={index}
-                className={selectedIndex === index ? 'selected' : ''}
+                className={selectedIndex === index ? "selected" : ""}
+                ref={(el) => {
+                  if (selectedIndex === index) {
+                    selectedElementRef.current = el;
+                  }
+                }}
               >
                 {item.sickNm}
               </li>
@@ -42,9 +52,6 @@ export default function SearchBox({ data, selectedIndex}: SearchBoxProps) {
     </>
   );
 }
-
-
-
 
 const StyledSearchBox = styled.div`
   background-color: #fff;
@@ -62,7 +69,7 @@ const StyledSearchBox = styled.div`
   li {
     padding: 0.5rem 0 0.5rem 1rem;
     cursor: pointer;
-    
+
     &:hover {
       background-color: #3284c7;
       color: #fff;
